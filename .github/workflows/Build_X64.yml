@@ -8,6 +8,10 @@
 
 name: Build_X64
 
+on: 
+  release:
+    types: [published]
+
 on:
   push:
     branches: 
