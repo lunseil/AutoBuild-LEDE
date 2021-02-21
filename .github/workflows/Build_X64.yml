@@ -1,19 +1,17 @@
 #=================================================
 # Description: Build OpenWrt using GitHub Actions
+#
 # Lisence: MIT
+#
 # Author: Lunseil
 #=================================================
 
 name: Build_X64
 
-on: 
-  release:
-    types: [published]
-
+on:
   push:
     branches: 
       - master   
-
   schedule:
     - cron: 0 6 * * *
   
