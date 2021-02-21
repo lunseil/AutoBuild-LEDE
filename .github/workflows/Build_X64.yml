@@ -7,10 +7,15 @@
 #=================================================
 
 name: Build_X64
-on: push 
 
-  #schedule:
-  #  - cron: 0 6 * * *
+on: 
+  release:
+    types: [published]
+
+  push:
+  
+  schedule:
+    - cron: 0 8 */5 * *
   
   #watch:
   #  types: [started]
