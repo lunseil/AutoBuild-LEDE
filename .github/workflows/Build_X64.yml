@@ -100,6 +100,13 @@ jobs:
         chmod +x ./customize.sh && ./customize.sh
         cd openwrt && make defconfig
         
+    - name: 更换banner
+      working-directory: ./openwrt
+      run: |
+        cd package/base-files/files/etc
+        sudo rm banner
+        wget https://raw.githubusercontent.com/lunseil/AutoBuild-LEDE/master/banner
+        
     - name: 下载DL库
       working-directory: ./openwrt
       run: |
