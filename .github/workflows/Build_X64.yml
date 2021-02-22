@@ -6,14 +6,13 @@
 # Author: Lunseil
 #=================================================
 
-name: Build_X64
+name: 编译X86_64
 
 on: 
   release:
     types: [published]
 
   push:
-  
   schedule:
     - cron: 30 5 */5 * *
   
