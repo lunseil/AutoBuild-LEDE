@@ -11,8 +11,11 @@ name: 编译X86_64
 on: 
   release:
     types: [published]
-
-  #push:
+    
+  push:
+    branches: 
+      - main
+      
   schedule:
     - cron: 30 5 */5 * *
   
