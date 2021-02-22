@@ -16,7 +16,7 @@ on:
         
 # 定时清理
   schedule:
-    - cron: 0 8 */5 * *
+    - cron: 0 8 */7 * *
         
 jobs:
   del_runs:
@@ -24,11 +24,11 @@ jobs:
     name: delete-workflow-runs
     steps:
     
-   - name: 删除自动发布的老固件
-     uses: dev-drprasad/delete-older-releases@v0.1.0
-     if: (github.event.inputs.delete-older-releases == 'true' && github.event.inputs.delete-older-releases  != 'false')
-     with:
-       keep_latest: 1         #保留多少个发布不删除
-       delete_tags: true
-     env:
-       GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}  
+      - name: 删除自动发布的老固件
+        uses: dev-drprasad/delete-older-releases@v0.1.0
+        if: (github.event.inputs.delete-older-releases == 'true' && github.event.inputs.delete-older-releases  != 'false')
+        with:
+          keep_latest: 1         #保留多少个发布不删除
+          delete_tags: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}  
