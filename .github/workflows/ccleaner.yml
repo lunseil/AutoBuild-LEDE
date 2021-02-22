@@ -23,7 +23,7 @@ jobs:
     name: delete-workflow-runs
     steps:
     
-      - name: 删除自动发布的老固件
+      - name: 删除旧的固件
         uses: dev-drprasad/delete-older-releases@v0.1.0
         if: (github.event.inputs.delete-older-releases == 'true' && github.event.inputs.delete-older-releases  != 'false')
         with:
