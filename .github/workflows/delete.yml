@@ -11,9 +11,16 @@
 
 name: delete
 on:
-  push:
-    branches: 
-      - main
+  workflow_dispatch:
+    inputs:
+      delete-older-workflow:
+        description: '删除github空间旧固件'
+        required: false
+        default: 'false'           #删除github空间旧固件（true=开启）（false=关闭）
+      delete-older-releases:
+        description: '删除旧的发布'
+        required: false
+        default: 'false'           #删除旧的发布（true=开启）（false=关闭）
 
 #  schedule:
 #    - cron: 0 8 */5 * *
@@ -30,14 +37,14 @@ jobs:
         with:
           token: ${{ github.token }}
           repository: ${{ github.repository }}       
-          retain_days: 0.5
+          retain_days: 0.1
           keep_minimum_runs: 0
     
       - name: 删除自动发布的老固件
-        uses: dev-drprasad/delete-older-releases@v0.1.0
+        uses: dev-drprasad/delete-older-releases@v0.2.0
         if: (github.event.inputs.delete-older-releases == 'true' && github.event.inputs.delete-older-releases  != 'false')
         with:
-          keep_latest: 0         #保留多少个发布不删除
-          delete_tags: true
+          keep_latest: 3         #保留多少个发布不删除
+          delete_tags: beta
         env:
-          GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
