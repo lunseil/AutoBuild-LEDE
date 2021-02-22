@@ -5,7 +5,7 @@
 # Youtube Channel: https://goo.gl/fvkdwm 
 #=================================================
 
-name: Build_Redmi_AC2100
+name: 编译_AC2100
 
 on: 
   release:
