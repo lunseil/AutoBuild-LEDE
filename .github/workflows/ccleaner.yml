@@ -7,13 +7,8 @@
 
 name: 清理旧固件
 on:
-  workflow_dispatch:
-    inputs:
-      delete-older-releases:
-        description: '删除旧的固件'
-        required: false
-        default: 'false'           #手动删除旧的发布（true=开启）（false=关闭）定时清理默认开启
-        
+  
+  push：      
 # 定时清理
   schedule:
     - cron: 0 8 */7 * *
