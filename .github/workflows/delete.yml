@@ -11,6 +11,11 @@
 
 name: delete
 on:
+
+  push:
+    branches: 
+      - main
+      
   workflow_dispatch:
     inputs:
       delete-older-workflow:
