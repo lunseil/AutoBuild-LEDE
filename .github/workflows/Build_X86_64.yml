@@ -17,7 +17,7 @@ on:
 #      - main
       
   schedule:
-    - cron: 30 5 */5 * *
+    - cron: 30 5 * * *
   
   #watch:
   #  types: [started]
