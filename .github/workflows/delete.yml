@@ -16,7 +16,7 @@ on:
       delete-older-workflow:
         description: '删除github空间旧固件'
         required: false
-        default: 'true'           #删除github空间旧固件（true=开启）（false=关闭）
+        default: 'false'           #删除github空间旧固件（true=开启）（false=关闭）
       delete-older-releases:
         description: '删除旧的发布'
         required: false
