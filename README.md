@@ -1,6 +1,4 @@
 # AutoBuild-LEDE
-AutoBuild-LEDE
-执照 GitHub星 GitHub福克斯 GitHub最后提交
 
 使用GitHub Actions构建OpenWrt固件精益的OpenWrt，
 特此感谢P3TERX的出色工作：https://github.com/P3TERX/Actions-OpenWrt/
