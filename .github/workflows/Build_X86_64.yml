@@ -12,12 +12,12 @@ on:
   release:
     types: [published]
     
-#  push:
-#    branches: 
-#      - main
+  push:
+    branches: 
+      - main
       
   schedule:
-    - cron: 0  21 * * *
+    - cron: 0 21 * * *
   
   #watch:
   #  types: [started]
@@ -121,6 +121,7 @@ jobs:
       run: |
         echo -e "$(nproc) thread build."
         make -j$(nproc) V=s
+        echo "date=$(date "+%y.%m.%d-%H.%M")" >> $GITHUB_ENV
    
     - name: 删除冗余文件
       working-directory: ./openwrt
@@ -140,5 +141,5 @@ jobs:
     - name : 上传固件
       uses: actions/upload-artifact@master
       with:
-        name: OpenWrt
-        path: openwrt/bin
+        name: OpenWrt_Lean_${{ env.date }}
+        path: openwrt/bin/targets
