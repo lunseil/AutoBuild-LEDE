@@ -17,7 +17,7 @@ on:
 #      - main
       
   schedule:
-    - cron: 30 5 * * *
+    - cron: 0  21 * * *
   
   #watch:
   #  types: [started]
@@ -109,14 +109,14 @@ jobs:
         sudo rm banner
         wget https://raw.githubusercontent.com/lunseil/AutoBuild-LEDE/master/banner
         
-    - name: 下载DL库
+    - name: 预下载DL库
       working-directory: ./openwrt
       run: |
         make download -j$(nproc)
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
         
-    - name: 构建固件
+    - name: 正式编译固件
       working-directory: ./openwrt
       run: |
         echo -e "$(nproc) thread build."
