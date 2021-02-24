@@ -12,16 +12,13 @@ on:
   release:
     types: [published]
     
-  push:
-    branches: 
-      - main
+#  push:
+#    branches: 
+#      - main
       
   schedule:
     - cron: 0 21 * * *
   
-  #watch:
-  #  types: [started]
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -138,7 +135,7 @@ jobs:
         find -name "*tar.gz*" | xargs -i mv -f {} packages
         rm -rf packages
       
-    - name : 上传固件
+    - name : 打包上传
       uses: actions/upload-artifact@master
       with:
         name: OpenWrt_Lean_${{ env.date }}
