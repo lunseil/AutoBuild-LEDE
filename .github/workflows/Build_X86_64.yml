@@ -134,7 +134,15 @@ jobs:
         find -name "*rootfs.img*" | xargs -i mv -f {} packages
         find -name "*tar.gz*" | xargs -i mv -f {} packages
         rm -rf packages
-      
+    
+    - name: Release zip
+      uses: ncipollo/release-action@v1.8.0
+      with:
+        artifacts: "openwrt/bin/targets"
+        tag: ${{ env.date }}
+        name: OpenWrt_Lean_${{ env.date }}
+        token: ${{ secrets.GITHUB_TOKEN }}
+        
     - name : 打包上传
       uses: actions/upload-artifact@master
       with:
