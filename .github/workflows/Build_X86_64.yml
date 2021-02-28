@@ -136,12 +136,14 @@ jobs:
         rm -rf packages
     
     - name: Release zip
-      uses: ncipollo/release-action@v1.8.0
+      uses: softprops/action-gh-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         artifacts: "openwrt/bin/targets"
         tag: ${{ env.date }}
         name: OpenWrt_Lean_${{ env.date }}
-        token: ${{ secrets.GITHUB_TOKEN }}
+        
         
     - name : 打包上传
       uses: actions/upload-artifact@master
