@@ -18,6 +18,10 @@ on:
       
   schedule:
     - cron: 0 21 * * *
+    
+env: 
+  REPO_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+  TZ: Asia/Shanghai
   
 jobs:
   build:
@@ -136,11 +140,19 @@ jobs:
         find -name "*rootfs.img*" | xargs -i mv -f {} packages
         find -name "*tar.gz*" | xargs -i mv -f {} packages
         rm -rf packages
+        echo "FIRMWARE=$PWD" >> $GITHUB_ENV
+        echo "::set-output name=status::success"
+        
+    - name: read Settings
+      run: |
+        source "./settings.ini"
+        echo "UPLOAD_RELEASE=${UPLOAD_RELEASE}" >> $GITHUB_ENV
     
     - name: Release zip
-      uses: ncipollo/release-action@v1.8.0
+      uses: softprops/action-gh-release@v1
+      if: steps.organizer.outputs.status == 'success' && env.UPLOAD_RELEASE == 'true' || (github.event.inputs.release == 'release' && github.event.inputs.release  != 'false')
       env:
-        GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
       with:
         name: OpenWrt_Lean_${{ env.date1 }}
         tag_name: ${{ env.date2 }}
@@ -150,7 +162,7 @@ jobs:
             ☆  分支 : master
             
             ☆  感谢源码作者Lean大神无私分享！
-        files: openwrt/bin/targets/*
+        files: ${{ env.FIRMWARE }}/*
         
     - name : 打包上传
       uses: actions/upload-artifact@master
