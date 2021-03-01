@@ -147,7 +147,13 @@ jobs:
       run: |
         source "./settings.ini"
         echo "UPLOAD_RELEASE=${UPLOAD_RELEASE}" >> $GITHUB_ENV
-    
+        
+    - name : 打包上传
+      uses: actions/upload-artifact@master
+      with:
+        name: OpenWrt_Lean_${{ env.date }}
+        path: ${{ env.FIRMWARE }}
+        
     - name: Release zip
       uses: softprops/action-gh-release@v1
       if: steps.organizer.outputs.status == 'success' && env.UPLOAD_RELEASE == 'true' || (github.event.inputs.release == 'release' && github.event.inputs.release  != 'false')
@@ -157,15 +163,10 @@ jobs:
         name: OpenWrt_Lean_${{ env.date1 }}
         tag_name: ${{ env.date2 }}
         body: |
-            ☆  源码 : https://github.com/coolsnowwolf/lede
+            ☆  源码 : ${{ env.REPO_URL }}
             
-            ☆  分支 : master
+            ☆  分支 : ${{ env.REPO_BRANCH }}
             
             ☆  感谢源码作者Lean大神无私分享！
         files: ${{ env.FIRMWARE }}/*
-        
-    - name : 打包上传
-      uses: actions/upload-artifact@master
-      with:
-        name: OpenWrt_Lean_${{ env.date }}
-        path: openwrt/bin/targets
+               
