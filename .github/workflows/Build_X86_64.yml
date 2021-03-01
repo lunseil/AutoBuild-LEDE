@@ -140,7 +140,7 @@ jobs:
     - name: Release zip
       uses: softprops/action-gh-release@v1
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
       with:
         name: OpenWrt_Lean_${{ env.date1 }}
         tag_name: ${{ env.date2 }}
@@ -150,7 +150,7 @@ jobs:
             ☆  分支 : master
             
             ☆  感谢源码作者Lean大神无私分享！
-        files: openwrt/bin/targets
+        files: openwrt/bin/targets/*
         
     - name : 打包上传
       uses: actions/upload-artifact@master
