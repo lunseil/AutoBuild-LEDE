@@ -169,6 +169,6 @@ jobs:
             
             ☆  分支 : ${{ env.REPO_BRANCH }}
             
-            ☆  感谢源码作者Lean大神无私分享！
+            ☆  感谢源码作者Lean大神无私享！
         files: ${{ env.FIRMWARE }}/*
                
