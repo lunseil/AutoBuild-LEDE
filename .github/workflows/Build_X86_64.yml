@@ -127,23 +127,6 @@ jobs:
         echo "date1=$(date "+%Y年%m月%d号-%H点%M分")" >> $GITHUB_ENV
         echo "date2=$(date "+%Y%m%d%H%M%S")" >> $GITHUB_ENV
         
-    - name: 删除冗余文件
-      working-directory: ./openwrt
-      run: |
-        cd bin/targets/*/*
-        rm -rf packages && mkdir packages
-        find -name "*feeds.buildinfo*" | xargs -i mv -f {} packages
-        find -name "*version.buildinfo*" | xargs -i mv -f {} packages
-        find -name "*sha256sums*" | xargs -i mv -f {} packages
-        find -name "*.manifest*" | xargs -i mv -f {} packages
-        find -name "*.bin*" | xargs -i mv -f {} packages
-        find -name "*.vmdk*" | xargs -i mv -f {} packages
-        find -name "*rootfs.img*" | xargs -i mv -f {} packages
-        find -name "*tar.gz*" | xargs -i mv -f {} packages
-        rm -rf packages
-        echo "FIRMWARE=$PWD" >> $GITHUB_ENV
-        echo "::set-output name=status::success"
-        
     - name: read Settings
       run: |
         source "${GITHUB_WORKSPACE}/settings.ini"
@@ -157,19 +140,5 @@ jobs:
         name: OpenWrt_Lean_${{ env.date }}
         path: ${{ env.FIRMWARE }}
         
-    - name: Release zip
-      uses: softprops/action-gh-release@v1
-      if: steps.organizer.outputs.status == 'success' && env.UPLOAD_RELEASE == 'true' || (github.event.inputs.release == 'release' && github.event.inputs.release  != 'false')
-      env:
-        GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
-      with:
-        name: OpenWrt_Lean_${{ env.date1 }}
-        tag_name: ${{ env.date2 }}
-        body: |
-            ☆  源码 : ${{ env.REPO_URL }}
-            
-            ☆  分支 : ${{ env.REPO_BRANCH }}
-            
-            ☆  感谢源码作者Lean大神无私享！
-        files: ${{ env.FIRMWARE }}/*
+
                
