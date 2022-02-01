@@ -37,7 +37,7 @@ jobs:
       run: |
         set +e
         docker rmi `docker images -q`
-        echo "正在删除文件，请稍候。。。"
+        echo "Deleting files, please wait ..."
         sudo rm -rf \
           /usr/share/dotnet \
           /etc/mysql \
@@ -67,7 +67,7 @@ jobs:
       run: |
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
         cd openwrt
-        sed -i 's/#src-git helloworld/src-git helloworld/g' ./feeds.conf.default
+        echo "src-git ssrp https://github.com/fw876/helloworld.git" >> ./feeds.conf.default
         
     - name: 升级 & 安装 feeds
       working-directory: ./openwrt
