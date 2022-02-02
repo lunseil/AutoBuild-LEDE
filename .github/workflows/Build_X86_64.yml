@@ -126,6 +126,10 @@ jobs:
         make -j$(nproc) V=s
         echo "date=$(date "+%y.%m.%d-%H.%M")" >> $GITHUB_ENV
         
+    - name: SSH connection to Actions
+      uses: P3TERX/debugger-action@master
+      if: env.SSH_ACTIONS == 'true' || contains(github.event.action, 'ssh')
+        
     - name: 删除冗余文件
       working-directory: ./openwrt
       run: |
