@@ -124,7 +124,24 @@ jobs:
         echo -e "$(nproc) thread build."
         make -j$(nproc) V=s
         echo "date=$(date "+%y.%m.%d-%H.%M")" >> $GITHUB_ENV
- 
+        
+    - name: 删除冗余文件
+      working-directory: ./openwrt
+      run: |
+        cd bin/targets/*/*
+        rm -rf packages && mkdir packages
+        find -name "*feeds.buildinfo*" | xargs -i mv -f {} packages
+        find -name "*version.buildinfo*" | xargs -i mv -f {} packages
+        find -name "*sha256sums*" | xargs -i mv -f {} packages
+        find -name "*.manifest*" | xargs -i mv -f {} packages
+        find -name "*.bin*" | xargs -i mv -f {} packages
+        find -name "*.vmdk*" | xargs -i mv -f {} packages
+        find -name "*rootfs.img*" | xargs -i mv -f {} packages
+        find -name "*tar.gz*" | xargs -i mv -f {} packages
+        rm -rf packages
+        echo "FIRMWARE=$PWD" >> $GITHUB_ENV
+        echo "::set-output name=status::success" 
+        
     - name : 打包上传
       uses: actions/upload-artifact@master
       with:
