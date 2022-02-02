@@ -21,6 +21,7 @@ on:
     
 env: 
   REPO_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+  SSH_ACTIONS: true
   TZ: Asia/Shanghai
   
 jobs:
