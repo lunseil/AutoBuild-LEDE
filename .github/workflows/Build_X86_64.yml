@@ -14,7 +14,7 @@ on:
 
   push:
     branches: 
-      - master
+      - main
 #  repository_dispatch:
 #  workflow_dispatch:
 #    inputs:
