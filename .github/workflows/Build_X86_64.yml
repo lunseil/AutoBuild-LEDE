@@ -17,13 +17,7 @@ on:
         required: false
         default: 'false'
     
-  push:
-    branches: 
-      - main
-      
-  schedule:
-    - cron: 0 21 * * *
-    
+
 env: 
   TZ: Asia/Shanghai
   
