@@ -83,11 +83,6 @@ jobs:
       working-directory: ./openwrt
       run: |
         git clone https://github.com/xiaorouji/openwrt-passwall.git package/openwrt-passwall
-  
-    - name: neobird主题
-      working-directory: ./openwrt
-      run: |
-        git clone https://github.com/thinktip/luci-theme-neobird.git package/neobird
         
     - name: 关机键
       working-directory: ./openwrt
@@ -100,6 +95,13 @@ jobs:
         cd package/lean
         rm -rf luci-app-netdata
         git clone https://github.com/sirpdboy/luci-app-netdata.git
+   
+    - name: neobird主题
+      working-directory: ./openwrt
+      run: |
+        cd package/lean  
+        rm -rf luci-theme-neobird  
+        git clone https://github.com/thinktip/luci-theme-neobird.git
         
     - name: 配置自定义
       env:
@@ -121,7 +123,7 @@ jobs:
       if: (github.event.inputs.ssh == 'true' && github.event.inputs.ssh  != 'false') || contains(github.event.action, 'ssh')
       env:
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}    
+        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}     
         
     - name: 预下载DL库
       working-directory: ./openwrt
