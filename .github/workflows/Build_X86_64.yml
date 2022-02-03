@@ -9,6 +9,12 @@
 name: 编译X86_64
 
 on:
+  release:
+    types: [published]
+
+  push:
+    branches: 
+      - master
 #  repository_dispatch:
 #  workflow_dispatch:
 #    inputs:
@@ -16,12 +22,6 @@ on:
 #        description: 'SSH connection to Actions'
 #        required: false
 #        default: 'false'
-  release:
-    types: [published]
-
-  push:
-    branches: 
-      - master
 
 env: 
   TZ: Asia/Shanghai
