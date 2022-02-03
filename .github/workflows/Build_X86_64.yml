@@ -95,6 +95,14 @@ jobs:
         cd package/lean
         rm -rf luci-app-netdata
         git clone https://github.com/sirpdboy/luci-app-netdata.git
+    
+    #需要网易云node版本
+    - name: 京东签到
+      working-directory: ./openwrt
+      run: |
+        cd package/lean
+        rm -rf luci-app-jd-dailybonus
+        git clone https://github.com/jerrykuku/luci-app-jd-dailybonus.git  
    
     - name: neobird主题
       working-directory: ./openwrt
