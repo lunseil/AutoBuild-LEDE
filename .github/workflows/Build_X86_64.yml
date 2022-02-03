@@ -8,9 +8,14 @@
 
 name: 编译X86_64
 
-on: 
-  release:
-    types: [published]
+on:
+  repository_dispatch:
+  workflow_dispatch:
+    inputs:
+      ssh:
+        description: 'SSH connection to Actions'
+        required: false
+        default: 'false'
     
   push:
     branches: 
@@ -20,8 +25,6 @@ on:
     - cron: 0 21 * * *
     
 env: 
-  REPO_TOKEN: ${{ secrets.RELEASE_TOKEN }}
-  SSH_ACTIONS: true
   TZ: Asia/Shanghai
   
 jobs:
@@ -112,6 +115,13 @@ jobs:
         sudo rm banner
         wget https://raw.githubusercontent.com/lunseil/AutoBuild-LEDE/master/banner
         
+    - name: SSH连接
+      uses: P3TERX/ssh2actions@v1.0.0
+      if: (github.event.inputs.ssh == 'true' && github.event.inputs.ssh  != 'false') || contains(github.event.action, 'ssh')
+      env:
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}    
+        
     - name: 预下载DL库
       working-directory: ./openwrt
       run: |
@@ -122,13 +132,9 @@ jobs:
     - name: 正式编译固件
       working-directory: ./openwrt
       run: |
-        echo -e "$(nproc) thread build."
+        echo -e "$(nproc) thread compile."
         make -j$(nproc) V=s
         echo "date=$(date "+%y.%m.%d-%H.%M")" >> $GITHUB_ENV
-        
-    - name: SSH connection to Actions
-      uses: P3TERX/debugger-action@master
-      if: env.SSH_ACTIONS == 'true' || contains(github.event.action, 'ssh')
         
     - name: 删除冗余文件
       working-directory: ./openwrt
