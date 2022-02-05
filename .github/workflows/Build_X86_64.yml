@@ -82,11 +82,8 @@ jobs:
     - name: 第三方插件>>1
       working-directory: ./openwrt
       run: |
-   # paswall
         git clone https://github.com/xiaorouji/openwrt-passwall.git package/openwrt-passwall
-   # 关机键
         git clone https://github.com/esirplayground/luci-app-poweroff.git package/poweroff
-   # argon主题配置
         git clone https://github.com/jerrykuku/luci-app-argon-config.git package/argon-config
   
     - name: 第三方插件>>2
