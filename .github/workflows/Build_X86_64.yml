@@ -95,7 +95,7 @@ jobs:
         rm -rf luci-app-jd-dailybonus
         git clone https://github.com/jerrykuku/luci-app-jd-dailybonus.git 
         rm -rf luci-theme-argon
-        git clone -b revert-271-18.06_bing https://github.com/jerrykuku/luci-theme-argon.git
+        git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git
         
     - name: 配置自定义
       env:
