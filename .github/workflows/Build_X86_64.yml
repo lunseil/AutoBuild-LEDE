@@ -104,10 +104,17 @@ jobs:
         rm -rf luci-app-jd-dailybonus
         git clone https://github.com/jerrykuku/luci-app-jd-dailybonus.git  
    
+    - name: argon主题配置
+      working-directory: ./openwrt
+      run: |
+        git clone https://github.com/jerrykuku/luci-app-argon-config.git package/argon-config
+   
     - name: argon主题
       working-directory: ./openwrt
       run: |
-        echo "src-git jerryk https://github.com/jerrykuku/openwrt-package.git" >> ./feeds.conf.default
+        cd package/lean
+        rm -rf luci-theme-argon
+        git clone https://github.com/jerrykuku/luci-theme-argon/tree/revert-271-18.06_bing.git package/argon
         
     - name: 配置自定义
       env:
