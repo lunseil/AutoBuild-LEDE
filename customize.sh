@@ -19,6 +19,3 @@ sed -i 's/192.168.1.1/10.10.10.222/g' openwrt/package/base-files/files/bin/confi
 #5. 修改WAN口为PPPOE
 #sed -i 's/username/5161851ST@MYADSL/g' openwrt/package/base-files/files/bin/config_generate
 #sed -i 's/password/？？？？？？/g' openwrt/package/base-files/files/bin/config_generate
-
-#6. 修改默认主题
-sed -i 's/bootstrap/neobird/g' openwrt/package/base-files/files/bin/config_generate
