@@ -79,42 +79,48 @@ jobs:
         ./scripts/feeds install -a
         ./scripts/feeds install -a
         
-    - name: 导入第三方插件
+    - name: 第三方插件>>1
       working-directory: ./openwrt
       run: |
         git clone https://github.com/xiaorouji/openwrt-passwall.git package/openwrt-passwall
-        
-    - name: 关机键
-      working-directory: ./openwrt
-      run: |
         git clone https://github.com/esirplayground/luci-app-poweroff.git package/poweroff
+        git clone https://github.com/jerrykuku/luci-app-argon-config.git package/argon-config
+        
+    #- name: 关机键
+    #  working-directory: ./openwrt
+    #  run: |
+    #    git clone https://github.com/esirplayground/luci-app-poweroff.git package/poweroff
   
-    - name: netdata汉化
+    - name: 第三方插件>>2
       working-directory: ./openwrt
       run: |
         cd package/lean
         rm -rf luci-app-netdata
         git clone https://github.com/sirpdboy/luci-app-netdata.git
-    
-    #需要网易云node版本
-    - name: 京东签到
-      working-directory: ./openwrt
-      run: |
-        cd package/lean
         rm -rf luci-app-jd-dailybonus
-        git clone https://github.com/jerrykuku/luci-app-jd-dailybonus.git  
-   
-    - name: argon主题配置
-      working-directory: ./openwrt
-      run: |
-        git clone https://github.com/jerrykuku/luci-app-argon-config.git package/argon-config
-   
-    - name: argon主题
-      working-directory: ./openwrt
-      run: |
-        cd package/lean
+        git clone https://github.com/jerrykuku/luci-app-jd-dailybonus.git 
         rm -rf luci-theme-argon
         git clone -b revert-271-18.06_bing https://github.com/jerrykuku/luci-theme-argon.git
+    
+    #需要网易云node版本
+    #- name: 京东签到
+    #  working-directory: ./openwrt
+    #  run: |
+    #    cd package/lean
+    #    rm -rf luci-app-jd-dailybonus
+    #    git clone https://github.com/jerrykuku/luci-app-jd-dailybonus.git  
+   
+    #- name: argon主题配置
+    #  working-directory: ./openwrt
+    #  run: |
+    #    git clone https://github.com/jerrykuku/luci-app-argon-config.git package/argon-config
+   
+    #- name: argon主题
+    #  working-directory: ./openwrt
+    #  run: |
+    #    cd package/lean
+    #    rm -rf luci-theme-argon
+    #    git clone -b revert-271-18.06_bing https://github.com/jerrykuku/luci-theme-argon.git
         
     - name: 配置自定义
       env:
