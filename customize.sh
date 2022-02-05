@@ -15,11 +15,10 @@ sed -i 's/192.168.1.1/10.10.10.222/g' openwrt/package/base-files/files/bin/confi
 
 #4. 版本号里显示一个自己的名字
 #sed -i "s/OpenWrt /Lunseil build $(TZ=UTC-8 date "+%Y.%m.%d") @ OpenWrt /g" openwrt/package/lean/default-settings/files/zzz-default-settings
-   
-#5. 修改上游DNS
-#sed -i "2i # network config" openwrt/package/lean/default-settings/files/zzz-default-settings
-#sed -i "3i uci set network.lan.dns='114.114.114.114'" openwrt/package/lean/default-settings/files/zzz-default-settings
 
-#6. 修改WAN口为PPPOE
+#5. 修改WAN口为PPPOE
 #sed -i 's/username/5161851ST@MYADSL/g' openwrt/package/base-files/files/bin/config_generate
-#sed -i 's/password/240629/g' openwrt/package/base-files/files/bin/config_generate
+#sed -i 's/password/？？？？？？/g' openwrt/package/base-files/files/bin/config_generate
+
+#6. 修改默认主题
+sed -i 's/bootstrap/neobird/g' openwrt/feeds/luci/collections/luci/makefile
