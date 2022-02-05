@@ -9,19 +9,19 @@
 name: 编译X86_64
 
 on:
-  release:
-    types: [published]
+  #release:
+  #  types: [published]
 
-  push:
-    branches: 
-      - main
-  #repository_dispatch:
-  #workflow_dispatch:
-  #  inputs:
-  #    ssh:
-  #      description: 'SSH connection to Actions'
-  #      required: false
-  #      default: 'false'
+  #push:
+  #  branches: 
+  #    - main
+  repository_dispatch:
+  workflow_dispatch:
+    inputs:
+      ssh:
+        description: 'SSH connection to Actions'
+        required: false
+        default: 'false'
 
 env: 
   TZ: Asia/Shangha
