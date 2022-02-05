@@ -87,8 +87,8 @@ jobs:
     - name: 关机键
       working-directory: ./openwrt
       run: |
-        git clone https://github.com/esirplayground/luci-app-poweroff
-        
+        git clone https://github.com/esirplayground/luci-app-poweroff.git package/poweroff
+  
     - name: netdata汉化
       working-directory: ./openwrt
       run: |
