@@ -21,4 +21,4 @@ sed -i 's/192.168.1.1/10.10.10.222/g' openwrt/package/base-files/files/bin/confi
 #sed -i 's/password/？？？？？？/g' openwrt/package/base-files/files/bin/config_generate
 
 #6. 修改默认主题
-sed -i 's/bootstrap/neobird/g' openwrt/feeds/luci/collections/luci/makefile
+sed -i 's/bootstrap/neobird/g' openwrt/package/base-files/files/bin/config_generate
