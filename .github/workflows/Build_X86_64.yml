@@ -114,7 +114,7 @@ jobs:
       run: |
         cd package/lean
         rm -rf luci-theme-argon
-        git clone https://github.com/jerrykuku/luci-theme-argon/tree/revert-271-18.06_bing.git package/argon
+        git clone -b revert-271-18.06_bing https://github.com/jerrykuku/luci-theme-argon.git
         
     - name: 配置自定义
       env:
