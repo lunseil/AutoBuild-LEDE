@@ -9,19 +9,19 @@
 name: 编译X86_64
 
 on:
-  #release:
-  #  types: [published]
+  release:
+    types: [published]
 
-  #push:
-  #  branches: 
-  #    - main
-  repository_dispatch:
-  workflow_dispatch:
-    inputs:
-      ssh:
-        description: 'SSH connection to Actions'
-        required: false
-        default: 'false'
+  push:
+    branches: 
+      - main
+  #repository_dispatch:
+  #workflow_dispatch:
+  #  inputs:
+  #    ssh:
+  #      description: 'SSH connection to Actions'
+  #      required: false
+  #      default: 'false'
 
 env: 
   TZ: Asia/Shangha
@@ -87,7 +87,7 @@ jobs:
     - name: 关机键
       working-directory: ./openwrt
       run: |
-        git clone https://github.com/sirpdboy/luci-app-poweroffdevice package/luci-app-poweroffdevice
+        git clone https://github.com/esirplayground/luci-app-poweroff
         
     - name: netdata汉化
       working-directory: ./openwrt
